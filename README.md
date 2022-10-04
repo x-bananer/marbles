@@ -1,6 +1,4 @@
-# chat-nuxt
-
-> My world-class Nuxt.js project
+# marbles
 
 ## Build Setup
 
