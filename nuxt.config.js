@@ -2,6 +2,7 @@ const pkg = require('./package')
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 module.exports = {
+  telemetry: false,
   mode: 'universal',
 
   /*

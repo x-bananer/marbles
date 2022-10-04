@@ -1,9 +1,16 @@
 export const state = () => ({
-
+    user: {},
+    newUsersList: [], 
 })
 
-export const actions = {
-    SOCKET_newUser(ctx, data) {
-        console.log('New user', data)
+export const mutations = {
+    setUser(state, user) {
+        state.user = user;
+    },
+    clearUser(state) {
+        state.user = {};
+    },
+    SOCKET_newUser(state, data) {
+        state.newUsersList.push(data);
     }
 }

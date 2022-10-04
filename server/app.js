@@ -2,15 +2,19 @@ const app = require('express')()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
-io.on('connection', socket => {
-  console.log('IO Connected');
+const m = (name, id) => ({name, id});
 
-  socket.emit('newUser', {
-    name: 'User 1'
-  })
+io.on('connection', socket => {
+	socket.on('userJoined', (data, cb) => {
+		if(!data.name)return cb('Поле "Имя" обязательно для заполнения');
+		if(!data.room) return cb('Поле "Комната" обязательно для заполнения');
+		socket.join(data.room)
+		cb({userId: socket.id});
+		socket.broadcast.to(data.room).emit('newUser', m(data.name));
+	})
 })
 
 module.exports = {
-  app,
-  server
+	app,
+	server,
 }
